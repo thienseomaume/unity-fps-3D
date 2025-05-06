@@ -1,0 +1,35 @@
+{
+  "levelName": "map1",
+  "currentHealth": 100,
+  "playerPosition": {
+    "x": 0,
+    "y": 2,
+    "z": 0
+  },
+  "listItem": {
+    "ammo": 999,
+	"health": 100,
+	"pistol":1,
+	"ak74":1,
+	"uzi":1,
+	"firemagic":1
+  },
+  "listGun": {
+    "pistol": {
+      "id": "pistol",
+      "currentMagazine": 15,
+      "isOwned": true
+    },
+    "ak74": {
+      "id": "ak74",
+      "currentMagazine": 30,
+      "isOwned": true
+    },
+    "uzi": {
+      "id": "uzi",
+      "currentMagazine": 32,
+      "isOwned": true
+    }
+  },
+  "listIdSelectionBar": []
+}
