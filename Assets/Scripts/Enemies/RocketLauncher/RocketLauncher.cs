@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLauncher : MonoBehaviour, IEnemy,IHealth
+public class RocketLauncher : Enemy
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;

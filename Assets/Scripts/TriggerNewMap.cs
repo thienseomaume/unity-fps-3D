@@ -20,13 +20,9 @@ public class TriggerNewMap : MonoBehaviour,IInteractable
 
     public void Interact()
     {
-        foreach(var objectFound in FindObjectsOfType(typeof(MonoBehaviour)))
+        foreach(var objectFound in FindObjectsOfType(typeof(Enemy)))
         {
-            if(objectFound is IEnemy)
-            {
-                Debug.Log("found an object");
-                return;
-            }
+            return;
         }
         GameManager.Instance().NextLevel(nextMap, playerSpawnPosition);
     }

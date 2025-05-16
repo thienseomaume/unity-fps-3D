@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderSpawner : MonoBehaviour,IEnemy, IHealth
+public class SpiderSpawner : Enemy
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;

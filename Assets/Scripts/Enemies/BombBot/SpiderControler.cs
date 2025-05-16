@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpiderControler : MonoBehaviour, IEnemy,IHealth
+public class SpiderControler : Enemy
 {
     // Start is called before the first frame update
     [SerializeField] private int maxHealth;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneScript : MonoBehaviour,IEnemy,IHealth
+public class DroneScript : Enemy
 {
     // Start is called before the first frame update
     private Rigidbody droneRigidbody;

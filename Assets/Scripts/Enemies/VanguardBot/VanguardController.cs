@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class VanguardController : MonoBehaviour,IEnemy,IHealth
+public class VanguardController : Enemy
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;

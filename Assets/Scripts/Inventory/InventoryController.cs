@@ -215,8 +215,10 @@ public class InventoryController : MonoBehaviour
         ItemModel item = inventoryModel.GetListItems().Find(it => it.GetItemType() == selectedItem);
         if( item != null)
         {
+            ItemsEnum type = item.GetItemType();
+            int amount = item.GetAmount();
             inventoryModel.DropItem(item);
-            itemSpawner.SpawnItem(item.GetItemType(), item.GetAmount(), PlayerInformation.Instance().transform.position);
+            itemSpawner.SpawnItem(type, amount, PlayerInformation.Instance().GetTransform().position);
             ClearSelected();
             inventoryView.UpdateSlot(0, item.GetItemType());
         }
