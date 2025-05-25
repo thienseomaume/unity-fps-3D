@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHealth
 {
     // Start is called before the first frame update
     private IdleState idleState;
@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
         } 
         set {
             _currentHealth = Mathf.Clamp(value, 0, maxHealth);
-            //PlayerInformation.Instance().OnHealthChange(currentHealth, maxHealth);
             EventCenter.Instance().OnHealthChange(currentHealth, maxHealth);
         } }
     public bool isGround;
@@ -81,9 +80,6 @@ public class PlayerController : MonoBehaviour
         armsStateMachine.currentState = armStateNone;
         Cursor.lockState = CursorLockMode.Locked;
         GameManager.Instance().saveAction += SavePlayer;
-        //SelectionBar.Instance().onUsingItemLeftClick += ChangeStateToLeftClick;
-        //SelectionBar.Instance().onUsingItemR += ChangeStateToR;
-        //SelectionBar.Instance().onUsingNone += ChangeStateToNone;
         EventCenter.Instance().onUsingItemLeftClick += ChangeStateToLeftClick;
         EventCenter.Instance().onUsingItemR += ChangeStateToR;
         EventCenter.Instance().onUsingNone += ChangeStateToNone;
@@ -197,6 +193,10 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance().saveData.currentHealth = currentHealth;
     }
+    public void LoadPlayer()
+    {
+        currentHealth = GameManager.Instance().saveData.currentHealth;
+    }
     void HandleInteract()
     {
         RaycastHit hit;
@@ -229,5 +229,15 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(foot.position, footRadius);
+    }
+
+    public void IncreaseHealth(int amount)
+    {
+        
+    }
+
+    public void DecreaseHealth(int amount)
+    {
+        currentHealth -= amount;
     }
 }

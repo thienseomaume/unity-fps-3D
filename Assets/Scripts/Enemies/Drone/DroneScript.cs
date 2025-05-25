@@ -196,12 +196,12 @@ public class DroneScript : Enemy
         Destroy(gameObject);
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         if (!dronesController.playerDetected)
         {

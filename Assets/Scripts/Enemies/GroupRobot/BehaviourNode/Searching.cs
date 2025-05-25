@@ -19,6 +19,7 @@ public class Searching : Node
     }
     public override NodeStatus Excute()
     {
+        Debug.Log("searching");
         if (owner.HasGroup())
         {
             if (owner.IsGroupLeader() && owner.group.command != "search")

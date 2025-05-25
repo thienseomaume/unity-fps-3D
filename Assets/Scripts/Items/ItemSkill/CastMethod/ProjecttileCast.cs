@@ -11,7 +11,7 @@ public class ProjecttileCast : ICastMethod
         Vector3 directionCam = PlayerInformation.Instance().GetEnvironmentCamera().forward;
         Vector3 positionCam = PlayerInformation.Instance().GetEnvironmentCamera().position;
         Vector3 point;
-        Physics.Raycast(positionCam, directionCam, out hit, Mathf.Infinity);
+        Physics.Raycast(positionCam, directionCam, out hit, Mathf.Infinity,skillInfor.interactionLayerCast);
         if(hit.collider != null)
         {
             point = hit.point;

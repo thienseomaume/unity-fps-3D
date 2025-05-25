@@ -9,6 +9,14 @@ public class DetectTargetInGroup : Node
     public override void Init()
     {
         base.Init();
+        if(blackBoard == null)
+        {
+            Debug.Log("detecttargetingroup blackboard null");
+        }
+        else
+        {
+            Debug.Log("detecttargetingroup blackboard not null");
+        }
         owner = blackBoard.owner.GetComponent<Robot>();
         group = owner.group;
     }

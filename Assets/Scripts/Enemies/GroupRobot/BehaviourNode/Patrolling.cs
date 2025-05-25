@@ -19,6 +19,7 @@ public class Patrolling : Node
     }
     public override NodeStatus Excute()
     {
+        Debug.Log("patrolling");
         if (owner.HasGroup())
         {
             if (owner.IsGroupLeader() && owner.group.command!="patrol")
@@ -28,7 +29,7 @@ public class Patrolling : Node
         }
         if (!agent.hasPath)
         {
-            Vector3 destination = owner.GetStartPosition() + new Vector3(Random.Range(maxPatrolX, maxPatrolX), 0, Random.Range(maxPatrolZ, maxPatrolZ));
+            Vector3 destination = owner.GetStartPosition() + new Vector3(Random.Range(-maxPatrolX, maxPatrolX), 0, Random.Range(-maxPatrolZ, maxPatrolZ));
             agent.SetDestination(destination);
         }
         else

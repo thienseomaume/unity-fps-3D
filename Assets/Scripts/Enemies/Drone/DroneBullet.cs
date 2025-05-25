@@ -24,12 +24,10 @@ public class DroneBullet : MonoBehaviour
         if (collision != null)
         {
             Debug.Log(collision.collider.name);
-            PlayerController playerController;
-            playerController = collision.gameObject.GetComponent<PlayerController>();
-            if (playerController != null)
+            IHealth healthComponent = collision.gameObject.GetComponent<IHealth>();
+            if(healthComponent != null)
             {
-                playerController.TakeDamage(damage);
-                Destroy(gameObject);
+                healthComponent.DecreaseHealth(damage);
             }
             else
             {

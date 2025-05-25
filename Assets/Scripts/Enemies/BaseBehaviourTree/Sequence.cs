@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Sequence : Node
 {
-    protected List<Node> children;
     int indexRunning = -1;
     public override void Init()
     {
         base.Init();
-        foreach(Node child in children)
+        if (blackBoard == null)
+        {
+            Debug.Log("sequence black board null");
+        }
+        else
+        {
+            Debug.Log("sequence black board not null");
+        }
+        foreach (Node child in children)
         {
             child.Init();
         }
@@ -21,6 +28,11 @@ public class Sequence : Node
         foreach (Node child in children)
         {
             child.blackBoard = this.blackBoard;
+            Debug.Log("check");
+            if(child.blackBoard == null)
+            {
+                Debug.Log("nullllllllllllll");
+            }
         }
     }
     public Sequence(params Node[] childrenNode)
@@ -29,6 +41,14 @@ public class Sequence : Node
         foreach (Node child in children)
         {
             child.blackBoard = this.blackBoard;
+        }
+    }
+    public override void SetBlackBoard(BlackBoard blackBoard)
+    {
+        base.SetBlackBoard(blackBoard);
+        foreach(Node child in children)
+        {
+            child.SetBlackBoard(blackBoard);
         }
     }
     public override NodeStatus Excute()

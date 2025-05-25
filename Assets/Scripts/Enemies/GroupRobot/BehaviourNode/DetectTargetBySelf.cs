@@ -9,8 +9,8 @@ public class DetectTargetBySelf : Node
     public override void Init()
     {
         base.Init();
-        owner = blackBoard.owner.GetComponent<Robot>();
         target = blackBoard.target;
+        owner = blackBoard.owner.GetComponent<Robot>();
     }
     public override NodeStatus Excute()
     {
@@ -18,12 +18,12 @@ public class DetectTargetBySelf : Node
         {
             return NodeStatus.FAILURE;
         }
-        Vector3 directionToTarget = target.position - owner.viewPoint;
-        float cos = Vector3.Dot(owner.viewDirection.normalized, directionToTarget.normalized);
+        Vector3 directionToTarget = target.position - owner.viewPoint.position;
+        float cos = Vector3.Dot(owner.viewPoint.forward, directionToTarget.normalized);
         if(cos>0 && cos <= Mathf.Cos(owner.halfOfView))
         {
             float distance = directionToTarget.magnitude;
-            if (!Physics.Raycast(owner.viewPoint,directionToTarget, distance, owner.obstacleLayer))
+            if (!Physics.Raycast(owner.viewPoint.position,directionToTarget, distance, owner.obstacleLayer))
             {
                 blackBoard.lastTargetPos = target.position;
                 return NodeStatus.SUCCESS;

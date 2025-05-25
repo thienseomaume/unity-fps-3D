@@ -4,14 +4,32 @@ using UnityEngine;
 
 public class Selector : Node
 {
-    protected List<Node> children;
     int indexRunning = -1;
     public override void Init()
     {
         base.Init();
-        foreach(Node child in children)
+        if(blackBoard.owner == null)
         {
+            Debug.Log("selector black board null");
+        }
+        else
+        {
+            Debug.Log("selector black board not null");
+        }
+        
+        foreach(Node child in children)
+            
+        {
+            if (child.GetBlackBoard().owner == null)
+            {
+                Debug.Log("children's blackboard of selector null");
+            }
+            else
+            {
+                Debug.Log("children's blackboard of selector not null");
+            }
             child.Init();
+            
         }
     }
     public Selector(BlackBoard blackBoard, params Node[] childrenNode)
@@ -29,6 +47,14 @@ public class Selector : Node
         foreach (Node child in children)
         {
             child.blackBoard = blackBoard;
+        }
+    }
+    public override void SetBlackBoard(BlackBoard blackBoard)
+    {
+        base.SetBlackBoard(blackBoard);
+        foreach(Node child in children)
+        {
+            child.SetBlackBoard(blackBoard);
         }
     }
     public override NodeStatus Excute()

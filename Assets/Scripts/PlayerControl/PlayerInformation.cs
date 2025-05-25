@@ -42,14 +42,6 @@ public class PlayerInformation : MonoBehaviour
     {
         player.gameObject.SetActive(active);
     }
-    //public void UnlockGun(string gunId)
-    //{
-    //    PlayerController playerController = GetComponent<PlayerController>();
-    //    if (playerController != null)
-    //    {
-    //        playerController.UnlockGun(gunId);
-    //    }
-    //}
     public void Heal(int hp)
     {
         if (player != null)
@@ -75,5 +67,17 @@ public class PlayerInformation : MonoBehaviour
     public void OnHealthChange(int currentHealth, int maxHealth)
     {
         healthChangeAction?.Invoke(currentHealth, maxHealth);
+    }
+    public void LoadPlayer()
+    {
+        if (player != null)
+        {
+            player.LoadPlayer();
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(rootTransform.position, rootTransform.position + environmentCamera.forward * 5);
     }
 }

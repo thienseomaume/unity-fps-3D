@@ -29,6 +29,11 @@ public class InvertResult : Node
             return NodeStatus.RUNNING;
         }
     }
+    public override void SetBlackBoard(BlackBoard blackBoard)
+    {
+        base.SetBlackBoard(blackBoard);
+        child.SetBlackBoard(blackBoard);
+    }
     public override void Exit()
     {
         child.Exit();

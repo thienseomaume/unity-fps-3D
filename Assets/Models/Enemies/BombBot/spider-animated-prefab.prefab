@@ -233,6 +233,9 @@ MonoBehaviour:
   explodeSound: {fileID: 8300000, guid: 1e76438f3bd2c324fb67a589118b99b0, type: 3}
   footStep: {fileID: 8300000, guid: 397a9aea38d1bf5429d86232b702bf48, type: 3}
   explodeCountDown: {fileID: 8300000, guid: 4a06110e1acefc24a8c655e3050fe2fb, type: 3}
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!136 &4849000046401137509
 CapsuleCollider:
   m_ObjectHideFlags: 0

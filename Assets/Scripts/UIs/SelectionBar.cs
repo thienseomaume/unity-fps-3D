@@ -135,7 +135,7 @@ public class SelectionBar : MonoBehaviour
     {
         listUsableItems = listGameObject;
     }
-    public void ChangSelectedItemHandle()
+    public void ChangeSelectedItemHandle()
     {
         if (selectedItem!=null && selectedItem.GetComponent<IUsable>().IsUsing())
         {
@@ -254,7 +254,7 @@ public class SelectionBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangSelectedItemHandle();
+        ChangeSelectedItemHandle();
         if (selectedItem!=null && !selectedItem.GetComponent<IUsable>().IsUsing())
         {
             EventCenter.Instance().OnUsingNone();

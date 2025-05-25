@@ -54,6 +54,6 @@ public class FireBall : MonoBehaviour,ISkill
     }
     private void OnDestroy()
     {
-        
+        transform.GetChild(0).parent = null;
     }
 }

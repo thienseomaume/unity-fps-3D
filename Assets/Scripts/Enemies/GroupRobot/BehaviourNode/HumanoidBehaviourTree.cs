@@ -5,12 +5,21 @@ using UnityEngine.AI;
 
 public class HumanoidBehaviourTree : BehaviourTree
 {
+    public Transform target;
     public override void CreateTree()
     {
-        blackBoard.target = PlayerInformation.Instance()?.GetTransform();
+        blackBoard = new BlackBoard();
+        if (target != null)
+        {
+            blackBoard.target = target;
+        }
+        else
+        {
+            blackBoard.target = PlayerInformation.Instance()?.GetTransform();
+        }
         blackBoard.owner = transform;
         blackBoard.agent = GetComponent<NavMeshAgent>();
-        root = new Sequence(blackBoard,
+        root = new Selector(
                     new Sequence(
                         new LeaderOrSingle(),
                         new Selector(
@@ -66,10 +75,15 @@ public class HumanoidBehaviourTree : BehaviourTree
                             )
                         )
             );
+        root.SetBlackBoard(blackBoard);
         root.Init();
     }
     private void Start()
     {
-        
+        CreateTree();
+    }
+    private void Update()
+    {
+        NodeStatus status = root.Excute();
     }
 }

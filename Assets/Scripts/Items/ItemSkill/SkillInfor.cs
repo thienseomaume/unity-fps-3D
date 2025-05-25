@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName ="SkillInfor", fileName ="SkillInfor")]
 public class SkillInfor : ScriptableObject
 {
+    public LayerMask interactionLayerCast;
+    public LayerMask interactionLayerSkill;
     public int baseDamage;
     public float baseCooldown;
     public float baseEffectDuration;

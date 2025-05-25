@@ -18,7 +18,7 @@ public class Attack : Node
     }
     public override NodeStatus Excute()
     {
-        
+        Debug.Log("attack");
         agent.ResetPath();
         owner.AnimInstant(AnimationData.HUMANOID_IDLE_FIRE);
         lastTimeFire = Time.time;

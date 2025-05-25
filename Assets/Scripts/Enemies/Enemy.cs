@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHealth
 {
-    void IHealth.DecreaseHealth(int amount)
+    public virtual void DecreaseHealth(int amount)
     {
         
     }
 
-    void IHealth.IncreaseHealth(int amount)
+    public virtual void IncreaseHealth(int amount)
     {
         
     }

@@ -79,12 +79,12 @@ public class SpiderSpawner : Enemy
         Gizmos.DrawWireSphere(transform.position, playerDetectRange);
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)

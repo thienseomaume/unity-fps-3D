@@ -7,14 +7,13 @@ public class SkillBounder : MonoBehaviour
 {
     [SerializeField] private GameObject skillObject;
     [SerializeField] private SkillInfor skillInfor;
-    [SerializeField] private LayerMask interactionMask;
     public Transform rightHand;
     public Transform leftHand;
     private ICastMethod castMethod;
     private Action<float> cooldownAction;
     private float lastTimeUse;
     private float ratio=1.0f;
-    public void Active(Action actionUseSuccess)
+    public void Cast(Action actionUseSuccess)
     {
         if (IsReady())
         {
@@ -41,14 +40,13 @@ public class SkillBounder : MonoBehaviour
     }
     public void SpawnSkill(Vector3 position, Quaternion rotation)
     {
-        Debug.Log("checkedddddd");
         if (skillObject == null) return;
         GameObject skillObjectSpawned = Instantiate(skillObject);
         ISkill skill = skillObjectSpawned.GetComponent<ISkill>();
         if(skill != null)
         {
             lastTimeUse = Time.time;
-            skill.Initialize(position, rotation, skillInfor,interactionMask);
+            skill.Initialize(position, rotation, skillInfor,skillInfor.interactionLayerSkill);
         }
     }
 

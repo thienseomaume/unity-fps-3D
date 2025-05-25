@@ -18,6 +18,8 @@ public class RocketScript : MonoBehaviour
     private float speedRotate;
     AudioSource audioSource;
     [SerializeField] AudioClip explodeSound;
+    [SerializeField] LayerMask interactionLayers;
+    Collider[] interactionColliders = new Collider[1];
     // Start is called before the first frame update
     private void Awake()
     {
@@ -69,9 +71,10 @@ public class RocketScript : MonoBehaviour
         bodyRocket.SetActive(false);
         destroyed = true;
         explodeClone = Instantiate(explodeParticle, transform.position, Quaternion.identity);
-        if ((playerTransform.position - transform.position).magnitude <= explodeRadius)
+        int hitCount = Physics.OverlapSphereNonAlloc(transform.position, explodeRadius, interactionColliders, interactionLayers);
+        if (hitCount > 0)
         {
-            playerTransform.GetComponent<PlayerController>().TakeDamage(damage);
+            interactionColliders[0].GetComponent<IHealth>()?.DecreaseHealth(damage);
         }
         audioSource.Stop();
         SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);

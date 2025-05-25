@@ -14,6 +14,10 @@ public class LeaderOrSingle : Node
     }
     public override NodeStatus Excute()
     {
+        if(owner.HasGroup())
+        {
+            //Debug.Log("check 2");
+        }
         if (group == null || owner.IsGroupLeader())
         {
             return NodeStatus.SUCCESS;

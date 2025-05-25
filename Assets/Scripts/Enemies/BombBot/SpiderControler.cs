@@ -29,6 +29,8 @@ public class SpiderControler : Enemy
     private AudioSource audioSource;
     [SerializeField] private AudioClip footStep;
     [SerializeField] private AudioClip explodeCountDown;
+    [SerializeField] private LayerMask interactionLayer;
+    private Collider[] interactColliders = new Collider[1];
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -100,11 +102,11 @@ public class SpiderControler : Enemy
     }
     void Explode()
     {
-        Debug.Log("exploded");
         Instantiate(particleExplode, transform.position, Quaternion.identity).transform.localScale *= 3;
-        if (Vector3.Distance(transform.position,playerTransform.position)<= explodeRange)
+        int hitCount = Physics.OverlapSphereNonAlloc(transform.position, explodeRange, interactColliders,interactionLayer);
+        if (hitCount > 0)
         {
-            playerTransform.GetComponent<PlayerController>().TakeDamage(damage);
+            interactColliders[0].GetComponent<IHealth>()?.DecreaseHealth(damage);
         }
         SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);
         Destroy(gameObject);
@@ -119,12 +121,12 @@ public class SpiderControler : Enemy
         }
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
@@ -132,4 +134,5 @@ public class SpiderControler : Enemy
             Explode();
         }
     }
+    
 }
