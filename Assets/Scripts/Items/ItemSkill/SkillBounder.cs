@@ -60,10 +60,7 @@ public class SkillBounder : MonoBehaviour
     void Update()
     {
         ratio = (Time.time - lastTimeUse) / skillInfor.baseCooldown;
-        if (ratio <= 1.0f)
-        {
-            cooldownAction?.Invoke(ratio);
-        }
+        cooldownAction?.Invoke(ratio);
     }
     private void OnEnable()
     {

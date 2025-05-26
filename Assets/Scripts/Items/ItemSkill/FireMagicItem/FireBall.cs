@@ -36,7 +36,7 @@ public class FireBall : MonoBehaviour,ISkill
             transform.position += Time.deltaTime * transform.forward * skillInfor.speed;
             Physics.OverlapSphereNonAlloc(transform.position, skillInfor.interactionRadius, interactedCollider,interactionLayer);
             if (interactedCollider[0] != null)
-            {
+            { 
                 interactedCollider[0].GetComponent<IHealth>()?.DecreaseHealth(skillInfor.baseDamage);
                 interactedCollider[0].GetComponent<EffectManager>()?.ApplyEffect(new BurningEffect(),skillInfor);
                 Instantiate(explodeParticle, transform.position,Quaternion.identity);
@@ -54,6 +54,6 @@ public class FireBall : MonoBehaviour,ISkill
     }
     private void OnDestroy()
     {
-        transform.GetChild(0).parent = null;
+
     }
 }
