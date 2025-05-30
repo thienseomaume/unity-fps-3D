@@ -20,6 +20,7 @@ MonoBehaviour:
     m_Bits: 320
   baseDamage: 10
   baseCooldown: 1
+  timeUsing: 0.5
   baseEffectDuration: 5
   skillRange: 50
   interactionRadius: 0.5

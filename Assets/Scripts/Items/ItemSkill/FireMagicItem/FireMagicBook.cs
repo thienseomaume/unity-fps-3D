@@ -21,7 +21,10 @@ public class FireMagicBook : MonoBehaviour, IItem, IUsable, ILeftClick, IEpress
 
     public bool IsUsing()
     {
-
+        if(leftClickSkill.IsUsing())
+        {
+            return true;
+        }
         return false;
     }
 

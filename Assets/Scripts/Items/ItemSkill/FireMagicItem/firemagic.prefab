@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6604550137789654267}
   - component: {fileID: 6604550137789654261}
   - component: {fileID: 6604550137789654260}
+  - component: {fileID: -5966171026160998656}
   m_Layer: 7
   m_Name: firemagic
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 6
-  animatorOverride: {fileID: 22100000, guid: 2ddd664fea925284da8445b66c5a71fb, type: 2}
+  animatorOverride: {fileID: 22100000, guid: 76315a354cce52746b71e3b0d02ded6c, type: 2}
   leftClickSkill: {fileID: 6604550137789654260}
 --- !u!114 &6604550137789654260
 MonoBehaviour:
@@ -62,6 +63,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillObject: {fileID: 9161213829568172039, guid: c21433c7fc5c78c4ab70797f0da7c9cc, type: 3}
   skillInfor: {fileID: 11400000, guid: 9c41e1fddd760d141b5e2b93fc351c27, type: 2}
-  interactionMask:
-    serializedVersion: 2
-    m_Bits: 320
+  rightHand: {fileID: 0}
+  leftHand: {fileID: 0}
+--- !u!114 &-5966171026160998656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604550137789654266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18d22fe3cc85f94aab54356da53238f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillObject: {fileID: 0}
+  skillInfor: {fileID: 0}
+  rightHand: {fileID: 0}
+  leftHand: {fileID: 0}

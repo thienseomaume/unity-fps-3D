@@ -10,6 +10,7 @@ public class SkillInfor : ScriptableObject
     public LayerMask interactionLayerSkill;
     public int baseDamage;
     public float baseCooldown;
+    public float timeUsing;
     public float baseEffectDuration;
     public float skillRange;
     public float interactionRadius;

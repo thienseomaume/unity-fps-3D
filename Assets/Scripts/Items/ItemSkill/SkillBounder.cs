@@ -12,6 +12,7 @@ public class SkillBounder : MonoBehaviour
     private ICastMethod castMethod;
     private Action<float> cooldownAction;
     private float lastTimeUse;
+    private float timeUsing;
     private float ratio=1.0f;
     public void Cast(Action actionUseSuccess)
     {
@@ -32,6 +33,14 @@ public class SkillBounder : MonoBehaviour
             return false;
         }
     }
+    public bool IsUsing()
+    {
+        if(Time.time >= lastTimeUse + timeUsing || timeUsing==0 || lastTimeUse == 0)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public void Setup(Action<float> cooldownAction, ICastMethod castMethod)
     {
@@ -46,6 +55,7 @@ public class SkillBounder : MonoBehaviour
         if(skill != null)
         {
             lastTimeUse = Time.time;
+            timeUsing = skillInfor.timeUsing;
             skill.Initialize(position, rotation, skillInfor,skillInfor.interactionLayerSkill);
         }
     }
