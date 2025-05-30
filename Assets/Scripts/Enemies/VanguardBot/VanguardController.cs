@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class VanguardController : MonoBehaviour,IEnemy,IHealth
+public class VanguardController : Enemy
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
@@ -378,12 +378,12 @@ public class VanguardController : MonoBehaviour,IEnemy,IHealth
         Destroy(gameObject);
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         currentHealth -= amount;
         if(isDetectedPlayer == false)

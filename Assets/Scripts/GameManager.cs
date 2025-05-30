@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
         LoadFileToModel(saveDataPath);
         InventoryController.Instance().Initialize();
         SelectionBar.Instance().Initialize();
+        PlayerInformation.Instance().LoadPlayer();
         LoadScene(saveData.levelName);
     }
     public void LoadNewGame()
@@ -121,6 +122,7 @@ public class GameManager : MonoBehaviour
         LoadFileToModel(saveDataPath);
         InventoryController.Instance().Reload();
         SelectionBar.Instance().Reload();
+        PlayerInformation.Instance().LoadPlayer();
         LoadScene(saveData.levelName);
     }
     public void NextLevel(string nextSceneName, Vector3 nextPosition)

@@ -21,7 +21,11 @@ public class FireMagicBook : MonoBehaviour, IItem, IUsable, ILeftClick, IEpress
 
     public bool IsUsing()
     {
-        return true;
+        if(leftClickSkill.IsUsing())
+        {
+            return true;
+        }
+        return false;
     }
 
     public void SetUp()
@@ -36,7 +40,7 @@ public class FireMagicBook : MonoBehaviour, IItem, IUsable, ILeftClick, IEpress
 
     public void UseLeftClick(Action actionUseSuccess)
     {
-        leftClickSkill.Active(actionUseSuccess);
+        leftClickSkill.Cast(actionUseSuccess);
     }
     private void Awake()
     {

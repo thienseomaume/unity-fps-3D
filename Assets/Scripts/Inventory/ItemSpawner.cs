@@ -27,10 +27,10 @@ public class ItemSpawner : MonoBehaviour
             PickableItem itemScript = itemObject.GetComponent<PickableItem>();
             if (itemScript != null)
             {
-                Debug.Log("checked spawn: "+itemScript.GetItemType().ToString());
                 if (itemScript.GetItemType() == item)
                 {
                     Instantiate(itemObject, position, Quaternion.identity).GetComponent<PickableItem>()?.SetAmount(amount);
+                    Debug.Log("checked spawn: " + itemScript.GetItemType().ToString() + " at " + position.ToString());
                 }
             }
         }

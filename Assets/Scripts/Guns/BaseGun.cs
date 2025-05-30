@@ -138,7 +138,6 @@ public class BaseGun : MonoBehaviour, IItem, IUsable, IRPress, ILeftClick, IQPre
         verticleRecoilStep = 3;
         verticleRecoilStep = Mathf.Clamp(verticleRecoilStep * (float)(verticleRecoil / maxVerticleRecoil), verticleRecoilStep, verticleRecoilStep * 2.0f);
         verticleRecoil += verticleRecoilStep;
-        //Debug.Log("verticle recoil = " + verticleRecoil);
         horizontalRecoilStep = 2;
         horizontalRecoil = Random.RandomRange(-horizontalRecoilStep, horizontalRecoilStep);
     }

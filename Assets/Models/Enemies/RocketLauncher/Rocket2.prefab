@@ -9708,6 +9708,9 @@ MonoBehaviour:
     m_Bits: 64
   explodeParticle: {fileID: 4127873505304636106, guid: e22f607ebc897f34eb448a44af984752, type: 3}
   explodeSound: {fileID: 8300000, guid: 1e76438f3bd2c324fb67a589118b99b0, type: 3}
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!82 &-3051329176447065338
 AudioSource:
   m_ObjectHideFlags: 0

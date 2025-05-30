@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneScript : MonoBehaviour,IEnemy,IHealth
+public class DroneScript : Enemy
 {
     // Start is called before the first frame update
     private Rigidbody droneRigidbody;
@@ -196,12 +196,12 @@ public class DroneScript : MonoBehaviour,IEnemy,IHealth
         Destroy(gameObject);
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         if (!dronesController.playerDetected)
         {

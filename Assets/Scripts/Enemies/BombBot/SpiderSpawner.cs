@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderSpawner : MonoBehaviour,IEnemy, IHealth
+public class SpiderSpawner : Enemy
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
@@ -79,12 +79,12 @@ public class SpiderSpawner : MonoBehaviour,IEnemy, IHealth
         Gizmos.DrawWireSphere(transform.position, playerDetectRange);
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)

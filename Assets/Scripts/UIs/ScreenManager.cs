@@ -182,7 +182,6 @@ public class ScreenManager : MonoBehaviour
     }
     void SetHudScreen()
     {
-
         HudScreen hudScreen = listScreen[EnumScreen.HudScreen].GetComponent<HudScreen>();
         if (hudScreen != null)
         {

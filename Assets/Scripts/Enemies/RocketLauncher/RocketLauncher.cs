@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLauncher : MonoBehaviour, IEnemy,IHealth
+public class RocketLauncher : Enemy
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
@@ -113,12 +113,12 @@ public class RocketLauncher : MonoBehaviour, IEnemy,IHealth
         body.rotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
     }
 
-    public void IncreaseHealth(int amount)
+    public override void IncreaseHealth(int amount)
     {
         
     }
 
-    public void DecreaseHealth(int amount)
+    public override void DecreaseHealth(int amount)
     {
         currentHealth = Math.Clamp(currentHealth - amount, 0, maxHealth);
         if (currentHealth == 0)
