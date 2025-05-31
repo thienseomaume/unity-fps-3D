@@ -111,7 +111,7 @@ public class BaseGun : MonoBehaviour, IItem, IUsable, IRPress, ILeftClick, IQPre
                 impactClone.transform.position = hit.point;
                 impactClone.transform.rotation = Quaternion.LookRotation(hit.normal);
                 impactClone.SetActive(true);
-                SoundFxManager.Instance().SpawnSound(impactDirt, hit.point);
+                SoundFxManager.Instance().SpawnSound(impactDirt,false, hit.point);
                 BulletImpactManager.Instance().dirtImpactPool.Enqueue(impactClone);
             }
             else
@@ -122,7 +122,7 @@ public class BaseGun : MonoBehaviour, IItem, IUsable, IRPress, ILeftClick, IQPre
                 impactClone.transform.position = hit.point;
                 impactClone.transform.rotation = Quaternion.LookRotation(hit.normal);
                 impactClone.SetActive(true);
-                SoundFxManager.Instance().SpawnSound(impactMetal, hit.point);
+                SoundFxManager.Instance().SpawnSound(impactMetal,false, hit.point);
                 BulletImpactManager.Instance().metalImpactPool.Enqueue(impactClone);
             }
         }

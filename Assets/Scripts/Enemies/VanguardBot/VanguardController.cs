@@ -250,9 +250,9 @@ public class VanguardController : Enemy
         rightRandomPoint = rightRandomPoint + rightBarrelTransform.up * randomInsideCircle.y + rightBarrelTransform.right * randomInsideCircle.x;
         randomInsideCircle = Random.insideUnitCircle * barrelRadius;
         Instantiate(bullet, leftBarrelTransform.position+ leftBarrelTransform.up * randomInsideCircle.y + leftBarrelTransform.right * randomInsideCircle.x, Quaternion.LookRotation(leftRandomPoint - leftBarrelTransform.position));
-        SoundFxManager.Instance().SpawnSound(shootSound, leftBarrelTransform);
+        SoundFxManager.Instance().SpawnSound(shootSound,false, leftBarrelTransform);
         Instantiate(bullet, rightBarrelTransform.position+ rightBarrelTransform.up * randomInsideCircle.y + rightBarrelTransform.right * randomInsideCircle.x, Quaternion.LookRotation(rightRandomPoint - rightBarrelTransform.position));
-        SoundFxManager.Instance().SpawnSound(shootSound, rightBarrelTransform);
+        SoundFxManager.Instance().SpawnSound(shootSound,false, rightBarrelTransform);
     }
     void ChasePlayer()
     {
@@ -306,7 +306,7 @@ public class VanguardController : Enemy
             anchorLeft.y += Mathf.Sin(t * Mathf.PI)*stepHeight;
             yield return null;
         } while (t < 1);
-        SoundFxManager.Instance().SpawnSound(footStepSound, newPosition);
+        SoundFxManager.Instance().SpawnSound(footStepSound,false, newPosition);
         isWalkingLeft = false;
     }
     IEnumerator WalkRight()
@@ -324,7 +324,7 @@ public class VanguardController : Enemy
             anchorRight.y += Mathf.Sin(t * Mathf.PI) * stepHeight;
             yield return null;
         } while (t < 1);
-        SoundFxManager.Instance().SpawnSound(footStepSound, newPosition);
+        SoundFxManager.Instance().SpawnSound(footStepSound,false, newPosition);
         isWalkingRight = false;
     }
     private void OnDrawGizmos()
@@ -374,7 +374,7 @@ public class VanguardController : Enemy
     void Explode()
     {
         Instantiate(particleExplode, transform.position, Quaternion.identity).transform.localScale *= 10;
-        SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);
+        SoundFxManager.Instance().SpawnSound(explodeSound,false, transform.position);
         Destroy(gameObject);
     }
 

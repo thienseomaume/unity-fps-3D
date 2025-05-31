@@ -100,7 +100,7 @@ public class DroneScript : Enemy
             {
                 Instantiate(bullet, gun.position,gun.rotation);
                 muzzleFlash.Play();
-                SoundFxManager.Instance().SpawnSound(gunSound, gun);
+                SoundFxManager.Instance().SpawnSound(gunSound,false, gun);
                 delayShootTimer = delayShoot;
                 shootCounter -= 1;
             }
@@ -191,7 +191,7 @@ public class DroneScript : Enemy
     void Explode()
     {
         Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        SoundFxManager.Instance().SpawnSound(destroySound, transform.position);
+        SoundFxManager.Instance().SpawnSound(destroySound,false, transform.position);
         Destroy(dronesController.gameObject);
         Destroy(gameObject);
     }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,7 +40,7 @@ public class SoundFxManager : MonoBehaviour
     {
         
     }
-    public void SpawnSound(AudioClip audioClip,Transform transformSpawn) {
+    public void SpawnSound(AudioClip audioClip,bool loop,Transform transformSpawn) {
         if (Vector3.Distance(transformSpawn.position, PlayerInformation.Instance().GetTransform().position) >= 100)
         {
             return;
@@ -50,13 +49,12 @@ public class SoundFxManager : MonoBehaviour
         if (listSoundObjects.TryDequeue(out audioObject))
         {
             SoundObjectScript soundScript = audioObject.GetComponent<SoundObjectScript>();
-            soundScript.audioClip = audioClip;
-            soundScript.transformSpawn = transformSpawn;
+            soundScript.SetUp(audioClip, loop,transformSpawn);
             audioObject.SetActive(true);
         }
         
     }
-    public void SpawnSound(AudioClip audioClip, Vector3 positionSpawn)
+    public void SpawnSound(AudioClip audioClip,bool loop, Vector3 positionSpawn)
     {
         if (Vector3.Distance(positionSpawn, PlayerInformation.Instance().GetTransform().position) >= 100)
         {
@@ -66,7 +64,7 @@ public class SoundFxManager : MonoBehaviour
         if (listSoundObjects.TryDequeue(out audioObject))
         {
             SoundObjectScript soundScript = audioObject.GetComponent<SoundObjectScript>();
-            soundScript.audioClip = audioClip;
+            soundScript.SetUp(audioClip, loop);
             audioObject.transform.position = positionSpawn;
             audioObject.SetActive(true);
         }

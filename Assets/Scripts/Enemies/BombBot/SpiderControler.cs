@@ -108,7 +108,7 @@ public class SpiderControler : Enemy
         {
             interactColliders[0].GetComponent<IHealth>()?.DecreaseHealth(damage);
         }
-        SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);
+        SoundFxManager.Instance().SpawnSound(explodeSound,false, transform.position);
         Destroy(gameObject);
     }
 

@@ -41,7 +41,7 @@ public class SpiderSpawner : Enemy
             }else if (spawnCooldownTimer>1 && spawnCooldownTimer <= 1.5 && spawnEffect.isStopped)
             {
                 spawnEffect.Play();
-                SoundFxManager.Instance().SpawnSound(spawnEffectSound, spawnTransform.position);
+                SoundFxManager.Instance().SpawnSound(spawnEffectSound,false, spawnTransform.position);
             }
         }
     }
@@ -71,7 +71,7 @@ public class SpiderSpawner : Enemy
     void Explode()
     {
         Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        SoundFxManager.Instance().SpawnSound(destroySound, transform.position);
+        SoundFxManager.Instance().SpawnSound(destroySound,false, transform.position);
         Destroy(gameObject);
     }
     private void OnDrawGizmos()

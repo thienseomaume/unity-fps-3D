@@ -39,7 +39,7 @@ public class RocketLauncher : Enemy
     void Explode()
     {
         Instantiate(destroyEffect, transform.position, Quaternion.identity).transform.localScale = transform.localScale;
-        SoundFxManager.Instance().SpawnSound(destroySound, transform.position);
+        SoundFxManager.Instance().SpawnSound(destroySound,false, transform.position);
         Destroy(gameObject);
     }
     // Update is called once per frame

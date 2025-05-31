@@ -77,7 +77,7 @@ public class RocketScript : MonoBehaviour
             interactionColliders[0].GetComponent<IHealth>()?.DecreaseHealth(damage);
         }
         audioSource.Stop();
-        SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);
+        SoundFxManager.Instance().SpawnSound(explodeSound,false, transform.position);
 
     }
     public void SetPlayerTransform(Transform playerTransform)

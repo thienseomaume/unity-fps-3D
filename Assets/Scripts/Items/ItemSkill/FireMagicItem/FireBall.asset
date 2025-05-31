@@ -23,5 +23,5 @@ MonoBehaviour:
   timeUsing: 0.5
   baseEffectDuration: 5
   skillRange: 50
-  interactionRadius: 0.5
+  interactionRadius: 1
   speed: 50

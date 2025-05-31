@@ -25,7 +25,7 @@ public class FireMagicBook : MonoBehaviour, IItem, IUsable, ILeftClick, IEpress
         {
             return true;
         }
-        return false;
+        return false; 
     }
 
     public void SetUp()

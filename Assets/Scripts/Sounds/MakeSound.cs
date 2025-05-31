@@ -17,7 +17,6 @@ public class MakeSound : MonoBehaviour
     }
     public void SpawnSound(AudioClip audioClip)
     {
-        SoundFxManager.Instance().SpawnSound(audioClip, transform);
-
+        SoundFxManager.Instance().SpawnSound(audioClip,false, transform);
     }
 }

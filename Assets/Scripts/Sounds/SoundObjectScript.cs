@@ -7,40 +7,58 @@ public class SoundObjectScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public AudioSource audioSource;
-    public AudioClip audioClip;
-    public Transform transformSpawn;
-    private void Awake()
+    private AudioClip audioClip;
+    private Transform transformSpawn;
+
+    public void SetUp(AudioClip audioClip, bool loop)
     {
-        audioSource.loop = false;
+        this.audioClip = audioClip;
+        audioSource.loop = loop;
+        transformSpawn = null;
+    }
+    public void SetUp(AudioClip audioClip, bool loop, Transform transformSpawn)
+    {
+        this.audioClip = audioClip;
+        audioSource.loop = loop;
+        this.transformSpawn = transformSpawn;
     }
     private void OnEnable()
     {
-        if (audioClip != null)
+        if(audioClip != null)
         {
+            if (audioSource.loop)
+            {
+                audioSource.clip = audioClip;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
             if (transformSpawn != null)
             {
                 transform.position = transformSpawn.position;
             }
-            audioSource.PlayOneShot(audioClip, GameManager.Instance().GetSetting().soundFXVolume);
         }
     }
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (audioSource.isPlaying == false)
         {
-            transformSpawn = null;
-            SoundFxManager.Instance().GetBackToList(gameObject);
             gameObject.SetActive(false);
         }
-        if (transformSpawn != null)
+        if(transformSpawn != null)
         {
+            if (transformSpawn.gameObject.activeSelf == false)
+            {
+                gameObject.SetActive(false);
+            }
             transform.position = transformSpawn.position;
         }
+    }
+    private void OnDisable()
+    {
+        SoundFxManager.Instance().GetBackToList(gameObject);
     }
 }
