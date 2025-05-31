@@ -102,7 +102,6 @@ public class InventoryController : MonoBehaviour
                 ItemModel newItem = CreateNewItem(item.Value, item.Key);
                 if (newItem == null)
                 {
-                    Debug.Log("cannot load and create item from json ");
                     return;
                 }
                 else

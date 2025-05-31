@@ -9,6 +9,7 @@ public class FireBall : MonoBehaviour,ISkill
     private bool isInitialized = false;
     private Vector3 startPosition;
     private Collider[] interactedCollider = new Collider[1];
+    [SerializeField] private AudioClip explodeSound;
     [SerializeField] private GameObject explodeParticle;
     
     public void Initialize(Vector3 position, Quaternion rotation, SkillInfor skillInfor, LayerMask interactionLayer)
@@ -40,6 +41,7 @@ public class FireBall : MonoBehaviour,ISkill
                 interactedCollider[0].GetComponent<IHealth>()?.DecreaseHealth(skillInfor.baseDamage);
                 interactedCollider[0].GetComponent<EffectManager>()?.ApplyEffect(new BurningEffect(),skillInfor);
                 Instantiate(explodeParticle, transform.position,Quaternion.identity);
+                SoundFxManager.Instance().SpawnSound(explodeSound, transform.position);
                 Destroy(gameObject);
             }
         }
