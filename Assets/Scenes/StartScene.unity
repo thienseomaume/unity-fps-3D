@@ -3035,6 +3035,9 @@ MonoBehaviour:
   listItems:
   - {fileID: 509754108512362802, guid: 1306af0f08d33214bbfdacbe964408d9, type: 3}
   - {fileID: 2472035435184606487, guid: 63fbd54061898d349bfb0021b1c80b6e, type: 3}
+  - {fileID: 3076005738727911861, guid: 8db38429ac7dcbb42bb5ca0a4fa11f8d, type: 3}
+  - {fileID: 1877249667761471549, guid: 0413f7976dda50e4690f4b45fc8736e3, type: 3}
+  - {fileID: 8262106971445629781, guid: c23d755ca5393f84189813b10649e279, type: 3}
 --- !u!1 &389135684
 GameObject:
   m_ObjectHideFlags: 0
@@ -6469,7 +6472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.99998, y: 0}
+  m_AnchoredPosition: {x: 16.999971, y: 0}
   m_SizeDelta: {x: 0, y: 370.69}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &897390949
@@ -11134,8 +11137,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1875658811}
   m_HandleRect: {fileID: 1875658810}
   m_Direction: 2
-  m_Value: 0.99999964
-  m_Size: 0.75390655
+  m_Value: 1
+  m_Size: 0.7537613
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
