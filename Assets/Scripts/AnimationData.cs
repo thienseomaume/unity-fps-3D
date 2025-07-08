@@ -26,4 +26,5 @@ public static class AnimationData
 
     public static int HUMANOID_AIM = Animator.StringToHash("Aiming");
     public static int HUMANOID_HOLDING = Animator.StringToHash("Holding");
+    public static int HUMANOID_SEARCHING = Animator.StringToHash("Rifle Aiming Search");
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ReceiveCommand : Node
 {
-    string command;
-    public ReceiveCommand(string command)
+    int command;
+    public ReceiveCommand(int command)
     {
         this.command = command;
     }
     public override NodeStatus Excute()
     {
         Robot owner = blackBoard.owner.GetComponent<Robot>();
-        if(owner.group.command == command)
+        if (owner.group.command == command)
         {
             return NodeStatus.SUCCESS;
         }

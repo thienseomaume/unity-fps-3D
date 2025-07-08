@@ -42,9 +42,9 @@ public class EventCenter : MonoBehaviour
     {
         
     }
-    public void OnHealthChange(int currentHealth, int maxHealth)
+    public void OnSave()
     {
-        healthChangeAction?.Invoke(currentHealth, maxHealth);
+        saveAction?.Invoke();
     }
     public void OnChangeScene(string sceneName)
     {
@@ -53,6 +53,10 @@ public class EventCenter : MonoBehaviour
     public void OnLoadScene(float progress)
     {
         loadSceneAction?.Invoke(progress);
+    }
+    public void OnHealthChange(int currentHealth, int maxHealth)
+    {
+        healthChangeAction?.Invoke(currentHealth, maxHealth);
     }
     public void OnUsingItemLeftClick()
     {

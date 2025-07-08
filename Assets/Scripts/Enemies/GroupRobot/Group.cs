@@ -5,15 +5,15 @@ using UnityEngine;
 public class Group : MonoBehaviour
 {
     public List<Robot> members;
-    private List<bool> targetDetect;
+    private List<bool> targetDetects;
     public Formation formation;
     public bool detectedTarget;
     public Vector3 lastTargetPos = Vector3.zero;
-    public string command;
+    public int command;
     
     private bool UpdateTargetDetect()
     {
-        foreach(bool detect in targetDetect)
+        foreach(bool detect in targetDetects)
         {
             if(detect == true)
             {
@@ -21,6 +21,10 @@ public class Group : MonoBehaviour
             }
         }
         return false;
+    }
+    public void UpdateTargetDetectIndividual(Robot robot, bool isDetected)
+    {
+        targetDetects[IndexInGroup(robot)] = isDetected;
     }
     public Robot GetLeader()
     {
@@ -63,14 +67,25 @@ public class Group : MonoBehaviour
     }
     private void Awake()
     {
-        foreach(Robot robot in members)
+        foreach (Robot robot in members)
         {
             robot.group = this;
         }
-        targetDetect = new List<bool>(members.Count);
+        targetDetects = new List<bool>(new bool[members.Count]);
     }
+
     private void LateUpdate()
     {
         detectedTarget = UpdateTargetDetect();
+        Debug.Log(targetDetects.Count);
+        Debug.Log("last position = " + lastTargetPos);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        foreach(Robot robot in members)
+        {
+            Gizmos.DrawSphere(formation.GetPosition(this, robot), 0.5f);
+        }
     }
 }

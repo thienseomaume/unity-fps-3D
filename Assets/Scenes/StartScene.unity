@@ -6055,6 +6055,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 9004888140194991079, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6472,7 +6476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.999971, y: 0}
+  m_AnchoredPosition: {x: -16.999992, y: 0}
   m_SizeDelta: {x: 0, y: 370.69}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &897390949
@@ -11138,7 +11142,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1875658810}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7537613
+  m_Size: 0.7562414
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13645,7 +13649,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1085198172}
   m_HandleRect: {fileID: 1085198171}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -25,7 +25,7 @@ public class BulletScript : MonoBehaviour
         {
             timer = 0;
             time = 0;
-            gun.GetComponent<BaseGun>().ReturnBulletPool(this.gameObject);
+            gun.GetComponent<BaseGun>()?.ReturnBulletPool(this.gameObject);
             gameObject.SetActive(false);
         }
     }

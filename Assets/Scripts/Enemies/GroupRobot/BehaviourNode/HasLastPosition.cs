@@ -6,9 +6,9 @@ public class HasLastPosition : Node
 {
     Robot owner;
     Group group;
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
+        base.Init(blackBoard);
         owner = blackBoard.owner.GetComponent<Robot>();
         group = owner.group;
     }

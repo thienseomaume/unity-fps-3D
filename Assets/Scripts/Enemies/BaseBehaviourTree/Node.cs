@@ -10,17 +10,20 @@ public abstract class Node
     {
 
     }
-    public virtual void Init()
+    public virtual void Init(BlackBoard blackBoard)
     {
-
+        this.blackBoard = blackBoard;
+        if (children != null)
+        {
+            foreach (Node child in children)
+            {
+                child.Init(blackBoard);
+            }
+        }
     }
     public BlackBoard GetBlackBoard()
     {
         return blackBoard;
-    }
-    public virtual void SetBlackBoard(BlackBoard blackBoard)
-    {
-        this.blackBoard = blackBoard;
     }
     public abstract NodeStatus Excute();
     public virtual void Exit()

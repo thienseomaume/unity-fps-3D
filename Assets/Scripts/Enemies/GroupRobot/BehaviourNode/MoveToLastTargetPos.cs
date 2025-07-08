@@ -7,25 +7,49 @@ public class MoveToLastTargetPos : Node
 {
     Robot owner;
     NavMeshAgent agent;
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
+        base.Init(blackBoard);
         owner = blackBoard.owner.GetComponent<Robot>();
         agent = owner.navMeshAgent;
     }
     public override NodeStatus Excute()
     {
+        
+        Debug.Log("move to last target position");
+        Vector3 lastTargetPos;
         if (owner.HasGroup())
         {
-            if (owner.IsGroupLeader() && owner.group.command != "move")
+            lastTargetPos = owner.group.lastTargetPos;
+        }
+        else
+        {
+            lastTargetPos = blackBoard.lastTargetPos;
+        }
+        if (Vector3.Distance(lastTargetPos, agent.destination) > agent.stoppingDistance)
+        {
+            agent.SetDestination(lastTargetPos);
+        }
+        if (Vector3.Distance(agent.nextPosition,agent.destination) <= agent.stoppingDistance)
+        {
+            if (agent.hasPath)
             {
-                owner.group.command = "move";
+                agent.ResetPath();
+            }
+            return NodeStatus.SUCCESS;
+        }
+        
+        if (owner.HasGroup())
+        {
+            if (owner.IsGroupLeader() && owner.group.command != GroupCommand.MOVE_TO_TARGET)
+            {
+                owner.group.command = GroupCommand.MOVE_TO_TARGET;
             }
         }
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        
+        if (!owner.AnimCurrentIs(AnimationData.HUMANOID_AIM))
         {
-            agent.ResetPath();
-            return NodeStatus.SUCCESS;
+            owner.AnimInstant(AnimationData.HUMANOID_AIM);
         }
         return NodeStatus.RUNNING;
     }

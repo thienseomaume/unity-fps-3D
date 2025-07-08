@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName ="CircleFormation",menuName ="Group Formation/Circle")]
 public class CircleFormation : Formation
 {
     [SerializeField] float radius;

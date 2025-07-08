@@ -4,34 +4,46 @@ using UnityEngine;
 
 public class Searching : Node
 {
-    public float timer;
-    public float rotateProgress = 0f;
-    
-    Quaternion originRotation;
+    private float timer;
+
     Robot owner;
-    Transform spine;
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
+        base.Init(blackBoard);
         owner = blackBoard.owner.GetComponent<Robot>();
-        spine = owner.spine;
-        originRotation = spine.rotation;
     }
     public override NodeStatus Excute()
     {
         Debug.Log("searching");
         if (owner.HasGroup())
         {
-            if (owner.IsGroupLeader() && owner.group.command != "search")
+            if (owner.IsGroupLeader() && owner.group.command != GroupCommand.SEARCH)
             {
-                owner.group.command = "search";
+                owner.group.command = GroupCommand.SEARCH;
             }
         }
-        rotateProgress = Mathf.Sin(Mathf.Repeat(rotateProgress + owner.smoothRotate *Time.deltaTime,2*Mathf.PI));
-        spine.rotation = originRotation * Quaternion.AngleAxis(owner.maxRotateRange * rotateProgress, Vector3.up);
-        if(timer <= 0)
+        if (!owner.AnimCurrentIs(AnimationData.HUMANOID_SEARCHING))
+        {
+            int randomRotate = Random.Range(1, 3);
+            if (randomRotate == 1)
+            {
+                owner.AnimInstant(AnimationData.HUMANOID_SEARCHING);
+            }
+            else
+            {
+                owner.AnimInstant(AnimationData.HUMANOID_SEARCHING, 0.5f);
+            }
+            timer = owner.searchingTime;
+        }
+
+        if (timer <= 0)
         {
             timer = owner.searchingTime;
+            if (owner.HasGroup())
+            {
+                owner.group.lastTargetPos = Vector3.zero;
+            }
+            blackBoard.lastTargetPos = Vector3.zero;
             return NodeStatus.SUCCESS;
         }
         else
@@ -39,5 +51,14 @@ public class Searching : Node
             timer -= Time.deltaTime;
             return NodeStatus.RUNNING;
         }
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        if (owner.HasGroup())
+        {
+            owner.group.lastTargetPos = Vector3.zero;
+        }
+        blackBoard.lastTargetPos = Vector3.zero;
     }
 }

@@ -43,7 +43,7 @@ public class InventoryController : MonoBehaviour
     public void Initialize()
     {
         SaveDataModel saveData = GameManager.Instance().saveData;
-        GameManager.Instance().saveAction += SaveInventory;
+        EventCenter.Instance().saveAction += SaveInventory;
         foreach (var item in saveData.listItem)
         {
             ItemModel itemExist = inventoryModel.GetListItems().Find(i => i.GetItemType() == item.Key);
@@ -230,9 +230,8 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            
+            UseItem(selectedItem);
         }
-        UseItem(selectedItem);
     }
     public void UseItem(ItemsEnum item)
     {
@@ -349,10 +348,6 @@ public class InventoryController : MonoBehaviour
         }
         return null;
     }
-    //public GameObject GetUsableItem(ItemsEnum item)
-    //{
-    //    return listUsableItems.Find(it => it.GetComponent<IItem>().GetItemType() == item)?.gameObject;
-    //}
     void SaveInventory()
     {
         if (inventoryModel.GetListItems() != null)

@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     string saveDataPath;
     string saveSettingPath;
     public event Action saveAction;
-    public event Action<string> changeSceneAction;
-    public event Action<float> loadSceneAction;
     string _currentScene;
     bool isPaused;
     string currentScene
@@ -28,7 +26,6 @@ public class GameManager : MonoBehaviour
         set
         {
             _currentScene = value;
-            //changeSceneAction?.Invoke(currentScene);
             EventCenter.Instance().OnChangeScene(currentScene);
         }
     }
@@ -128,7 +125,7 @@ public class GameManager : MonoBehaviour
     public void NextLevel(string nextSceneName, Vector3 nextPosition)
     {
         Debug.Log("next to " + nextSceneName);
-        saveAction?.Invoke();
+        EventCenter.Instance().OnSave();
         saveData.levelName = nextSceneName;
         //saveAction = null;
         saveLoadManager.SaveData(saveData, saveDataPath);
@@ -149,9 +146,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayAgain()
     {
-       // saveAction = null;
         Resume();
-        //LoadScene(currentScene);
         LoadAgain();
     }
     public SettingModel GetSetting()
@@ -164,9 +159,8 @@ public class GameManager : MonoBehaviour
     }
     public void SaveFileDefault()
     {
-        saveAction.Invoke();
+        EventCenter.Instance().OnSave();
         saveData.levelName = SceneManager.GetActiveScene().name;
-        Debug.Log("save in scene = " + SceneManager.GetActiveScene().name);
         saveLoadManager.SaveData(saveData, defaultDataPath);
     }
     public void Pause()

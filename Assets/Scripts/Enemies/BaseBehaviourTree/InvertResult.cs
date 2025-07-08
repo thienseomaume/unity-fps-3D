@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class InvertResult : Node
 {
-    Node child;
     public InvertResult(Node child)
     {
-        this.child = child;
+        children = new List<Node>();
+        children.Add(child);
     }
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
-        child.Init();
+        base.Init(blackBoard);
+        children[0].Init(blackBoard);
     }
     public override NodeStatus Excute()
     {
-        NodeStatus result = child.Excute();
+        NodeStatus result = children[0].Excute();
         if(result == NodeStatus.SUCCESS)
         {
+            Debug.Log("failure");
             return NodeStatus.FAILURE;
         }else if(result == NodeStatus.FAILURE)
         {
+            Debug.Log("success");
             return NodeStatus.SUCCESS;
         }
         else
@@ -29,14 +31,9 @@ public class InvertResult : Node
             return NodeStatus.RUNNING;
         }
     }
-    public override void SetBlackBoard(BlackBoard blackBoard)
-    {
-        base.SetBlackBoard(blackBoard);
-        child.SetBlackBoard(blackBoard);
-    }
     public override void Exit()
     {
-        child.Exit();
+        children[0].Exit();
     }
 
 }

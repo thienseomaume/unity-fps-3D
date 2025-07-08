@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "ConvoyFormation", menuName = "Group Formation/Convoy")]
+
 public class ConvoyFormation : Formation
 {
     [SerializeField] float maxSpacing;
@@ -13,11 +15,13 @@ public class ConvoyFormation : Formation
         }
         Robot leader = group.GetMember(group.IndexInGroup(robot) - 1);
         Vector3 position = robot.position;
-        if ((leader.position - robot.position).sqrMagnitude >= maxSpacing * maxSpacing)
+        float distanceToLeader = Vector3.Distance(leader.position, position);
+        if (distanceToLeader > maxSpacing)
         {
-            position = -leader.direction * maxSpacing;
+            position = leader.position + (position - leader.position).normalized * maxSpacing;
+            position = AdjustPosition(leader.position, position);
         }
-        position = AdjustPosition(leader.position, position);
         return position;
     }
+
 }

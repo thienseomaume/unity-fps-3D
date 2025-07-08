@@ -18,8 +18,6 @@ public class SelectionBar : MonoBehaviour
     {
         if(instance == null)
         {
-            Debug.Log("init instance of selection bar");
-
             instance = this;
         }
         else
@@ -32,13 +30,9 @@ public class SelectionBar : MonoBehaviour
     {
         return instance;
     }
-    private void OnEnable()
-    {
-        Debug.Log("selection bar on enable call");
-    }
     public void Initialize()
     {
-        GameManager.Instance().saveAction += SaveData;
+        EventCenter.Instance().saveAction += SaveData;
         if(GameManager.Instance().saveData.listIdSelectionBar.Count > 0)
         {
             foreach(ItemsEnum item in GameManager.Instance().saveData.listIdSelectionBar)
@@ -126,7 +120,6 @@ public class SelectionBar : MonoBehaviour
         int index = 0;
         foreach(Sprite sprite in listSprites)
         {
-            Debug.Log("checked index sprite = " + index);
             listSlots[index].SetItemImage(sprite);
             index += 1;
         }
@@ -143,17 +136,14 @@ public class SelectionBar : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("check input number 1");
             SetSelectedItem(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("check input number 2");
             SetSelectedItem(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Debug.Log("check input number 3");
             SetSelectedItem(3);
         }
     }

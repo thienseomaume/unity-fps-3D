@@ -6,13 +6,9 @@ using UnityEngine.AI;
 public class Aim : Node
 {
     Robot owner;
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
-        if (blackBoard == null)
-        {
-            Debug.Log("nullllllllll1");
-        }
+        base.Init(blackBoard);
         owner = blackBoard.owner.GetComponent<Robot>();
     }
     public override NodeStatus Excute()
@@ -20,20 +16,23 @@ public class Aim : Node
         Debug.Log("aim");
         if (owner.HasGroup())
         {
-            if (owner.IsGroupLeader() && owner.group.command != "attack")
+            if (owner.IsGroupLeader() && owner.group.command != GroupCommand.ATTACK)
             {
-                owner.group.command = "attack";
+                owner.group.command = GroupCommand.ATTACK;
             }
         }
-        if (!owner.AnimCurrentIs(AnimationData.HUMANOID_AIM))
+        AnimatorStateInfo nextState = owner.GetNextSate();
+        if (!owner.AnimCurrentIs(AnimationData.HUMANOID_AIM) && nextState.shortNameHash!= AnimationData.HUMANOID_AIM)
         {
-            Debug.Log("check point 1");
-            owner.AnimCrossFade(AnimationData.HUMANOID_AIM, 0.5f);
+            owner.AnimCrossFade(AnimationData.HUMANOID_AIM,0.5f);
         }
-        if (owner.IsCurrentAnimStop(AnimationData.HUMANOID_AIM))
+        else
         {
-            blackBoard.alreadyAim = true;
-            return NodeStatus.SUCCESS;
+            if (owner.IsCurrentAnimStop())
+            {
+                blackBoard.alreadyAim = true;
+                return NodeStatus.SUCCESS;
+            }
         }
         return NodeStatus.RUNNING;
     }

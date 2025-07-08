@@ -9,9 +9,9 @@ public class Patrolling : Node
     NavMeshAgent agent;
     float maxPatrolX;
     float maxPatrolZ;
-    public override void Init()
+    public override void Init(BlackBoard blackBoard)
     {
-        base.Init();
+        base.Init(blackBoard);
         owner = blackBoard.owner.GetComponent<Robot>();
         agent = owner.navMeshAgent;
         maxPatrolX = owner.maxPatrolX;
@@ -22,10 +22,14 @@ public class Patrolling : Node
         Debug.Log("patrolling");
         if (owner.HasGroup())
         {
-            if (owner.IsGroupLeader() && owner.group.command!="patrol")
+            if (owner.IsGroupLeader() && owner.group.command!=GroupCommand.PATROL)
             {
-                owner.group.command = "patrol";
+                owner.group.command = GroupCommand.PATROL;
             }
+        }
+        if (!owner.AnimCurrentIs(AnimationData.HUMANOID_HOLDING))
+        {
+            owner.AnimInstant(AnimationData.HUMANOID_HOLDING);
         }
         if (!agent.hasPath)
         {
@@ -41,5 +45,9 @@ public class Patrolling : Node
             }
         }
         return NodeStatus.RUNNING;
+    }
+    public override void Exit()
+    {
+        agent.ResetPath();
     }
 }

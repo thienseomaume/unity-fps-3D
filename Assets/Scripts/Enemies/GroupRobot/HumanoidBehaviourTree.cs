@@ -48,12 +48,8 @@ public class HumanoidBehaviourTree : BehaviourTree
                             )
                         ),
                     new Selector(
-                        new InvertResult(new Selector(
-                            new DetectTargetBySelf(),
-                            new DetectTargetInGroup()
-                            )),
                         new Sequence(
-                            new ReceiveCommand("attack"),
+                            new ReceiveCommand(GroupCommand.ATTACK),
                             new Selector(
                                     new Sequence(
                                         new NotReadyAim(),
@@ -66,17 +62,19 @@ public class HumanoidBehaviourTree : BehaviourTree
                                     )
                             ),
                         new Sequence(
-                            new ReceiveCommand("move"),
-                            new Move()
+                            new Selector(
+                                new ReceiveCommand(GroupCommand.PATROL),
+                                new ReceiveCommand(GroupCommand.MOVE_TO_TARGET)
+                                ),
+                                new Move()
                             ),
                         new Sequence(
-                            new ReceiveCommand("search"),
+                            new ReceiveCommand(GroupCommand.SEARCH),
                             new Searching()
                             )
                         )
             );
-        root.SetBlackBoard(blackBoard);
-        root.Init();
+        root.Init(blackBoard);
     }
     private void Start()
     {

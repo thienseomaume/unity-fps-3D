@@ -1,6 +1,6 @@
 {
-  "levelName": "map1",
-  "currentHealth": 100,
+  "levelName": "map2",
+  "currentHealth": 1000,
   "playerPosition": {
     "x": 0,
     "y": 2,

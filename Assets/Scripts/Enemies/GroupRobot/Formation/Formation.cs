@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public abstract class Formation : ScriptableObject
 {
     protected Vector3 AdjustPosition(Vector3 leaderPosition, Vector3 position)

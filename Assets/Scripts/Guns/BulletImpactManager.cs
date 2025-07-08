@@ -31,14 +31,14 @@ public class BulletImpactManager : MonoBehaviour
     }
     private void CreatePool()
     {
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 200; i++)
         {
             GameObject clone = Instantiate(dirtImpact);
             clone.transform.SetParent(transform);
             dirtImpactPool.Enqueue(clone);
             clone.SetActive(false);
         }
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 200; i++)
         {
             GameObject clone = Instantiate(metalImpact);
             clone.transform.SetParent(transform);

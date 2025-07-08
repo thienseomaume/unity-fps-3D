@@ -5,50 +5,12 @@ using UnityEngine;
 public class Sequence : Node
 {
     int indexRunning = -1;
-    public override void Init()
-    {
-        base.Init();
-        if (blackBoard == null)
-        {
-            Debug.Log("sequence black board null");
-        }
-        else
-        {
-            Debug.Log("sequence black board not null");
-        }
-        foreach (Node child in children)
-        {
-            child.Init();
-        }
-    }
-    public Sequence(BlackBoard blackBoard,params Node[] childrenNode)
-    {
-        this.blackBoard = blackBoard;
-        children = new List<Node>(childrenNode);
-        foreach (Node child in children)
-        {
-            child.blackBoard = this.blackBoard;
-            Debug.Log("check");
-            if(child.blackBoard == null)
-            {
-                Debug.Log("nullllllllllllll");
-            }
-        }
-    }
     public Sequence(params Node[] childrenNode)
     {
         children = new List<Node>(childrenNode);
         foreach (Node child in children)
         {
             child.blackBoard = this.blackBoard;
-        }
-    }
-    public override void SetBlackBoard(BlackBoard blackBoard)
-    {
-        base.SetBlackBoard(blackBoard);
-        foreach(Node child in children)
-        {
-            child.SetBlackBoard(blackBoard);
         }
     }
     public override NodeStatus Excute()

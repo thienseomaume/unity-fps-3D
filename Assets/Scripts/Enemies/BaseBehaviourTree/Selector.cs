@@ -5,56 +5,12 @@ using UnityEngine;
 public class Selector : Node
 {
     int indexRunning = -1;
-    public override void Init()
-    {
-        base.Init();
-        if(blackBoard.owner == null)
-        {
-            Debug.Log("selector black board null");
-        }
-        else
-        {
-            Debug.Log("selector black board not null");
-        }
-        
-        foreach(Node child in children)
-            
-        {
-            if (child.GetBlackBoard().owner == null)
-            {
-                Debug.Log("children's blackboard of selector null");
-            }
-            else
-            {
-                Debug.Log("children's blackboard of selector not null");
-            }
-            child.Init();
-            
-        }
-    }
-    public Selector(BlackBoard blackBoard, params Node[] childrenNode)
-    {
-        this.blackBoard = blackBoard;
-        children = new List<Node>(childrenNode);
-        foreach (Node child in children)
-        {
-            child.blackBoard = this.blackBoard;
-        }
-    }
     public Selector(params Node[] childrenNode)
     {
         children = new List<Node>(childrenNode);
         foreach (Node child in children)
         {
             child.blackBoard = blackBoard;
-        }
-    }
-    public override void SetBlackBoard(BlackBoard blackBoard)
-    {
-        base.SetBlackBoard(blackBoard);
-        foreach(Node child in children)
-        {
-            child.SetBlackBoard(blackBoard);
         }
     }
     public override NodeStatus Excute()
@@ -73,7 +29,11 @@ public class Selector : Node
             }
             else if (status == NodeStatus.SUCCESS)
             {
-                indexRunning = -1;
+                if (indexRunning != -1)
+                {
+                    children[indexRunning].Exit();
+                    indexRunning = -1;
+                }
                 return status;
             }
         }
