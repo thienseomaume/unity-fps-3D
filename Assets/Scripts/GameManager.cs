@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     string defaultDataPath;
     string saveDataPath;
     string saveSettingPath;
-    public event Action saveAction;
     string _currentScene;
     bool isPaused;
     string currentScene
