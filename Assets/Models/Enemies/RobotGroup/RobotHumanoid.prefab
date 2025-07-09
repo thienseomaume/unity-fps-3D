@@ -183,8 +183,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   viewPoint: {fileID: 2696080237182020491}
   navMeshAgent: {fileID: 6388478754824300551}
-  fireCooldown: 0.2
+  fireCooldown: 0.1
   halfOfView: 50
+  maxDetectRange: 100
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -193,7 +194,7 @@ MonoBehaviour:
   speedRotateToTarget: 90
   cosMinSeeTarget: 0.98
   searchingTime: 4
-  shootingError: 1
+  shootingError: 0.5
   barrelOfGun: {fileID: 333393986136734121}
   muzzleFlash: {fileID: 2347302040927398516}
   interactableLayer:
@@ -201,9 +202,9 @@ MonoBehaviour:
     m_Bits: 192
   impactDirt: {fileID: 8300000, guid: 0f3623edfaa6bbc459a161314ea4d63b, type: 3}
   damage: 5
-  maxHealth: 0
+  maxHealth: 50
   destroyEffect: {fileID: 8343779264711105782, guid: 1f9a3df32c9ccb3449c64c195da03475, type: 3}
-  destroySound: {fileID: 8300000, guid: 74bf7675b074efc4b983e68b2215ee46, type: 3}
+  destroySound: {fileID: 8300000, guid: 80a322556d6389544a70eb299dac4830, type: 3}
 --- !u!195 &6388478754824300551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1

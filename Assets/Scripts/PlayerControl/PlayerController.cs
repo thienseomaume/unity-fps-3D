@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour, IHealth
         moveStateMachine.currentState = idleState;
         armsStateMachine.currentState = armStateNone;
         Cursor.lockState = CursorLockMode.Locked;
-        GameManager.Instance().saveAction += SavePlayer;
+        EventCenter.Instance().saveAction += SavePlayer;
         EventCenter.Instance().onUsingItemLeftClick += ChangeStateToLeftClick;
         EventCenter.Instance().onUsingItemR += ChangeStateToR;
         EventCenter.Instance().onUsingNone += ChangeStateToNone;

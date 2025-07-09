@@ -15,8 +15,6 @@ public class MoveToLastTargetPos : Node
     }
     public override NodeStatus Excute()
     {
-        
-        Debug.Log("move to last target position");
         Vector3 lastTargetPos;
         if (owner.HasGroup())
         {

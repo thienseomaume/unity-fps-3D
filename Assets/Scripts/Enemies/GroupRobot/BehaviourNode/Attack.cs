@@ -18,7 +18,6 @@ public class Attack : Node
     }
     public override NodeStatus Excute()
     {
-        Debug.Log("attack");
         if (owner.HasGroup())
         {
             owner.group.command = GroupCommand.ATTACK;

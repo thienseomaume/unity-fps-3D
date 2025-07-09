@@ -17,6 +17,7 @@ public class Robot : Enemy
     public NavMeshAgent navMeshAgent;
     public float fireCooldown;
     public float halfOfView;
+    public float maxDetectRange;
     public LayerMask obstacleLayer;
     public float maxPatrolX;
     public float maxPatrolZ;

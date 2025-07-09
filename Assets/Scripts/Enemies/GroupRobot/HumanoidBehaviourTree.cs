@@ -48,6 +48,7 @@ public class HumanoidBehaviourTree : BehaviourTree
                             )
                         ),
                     new Selector(
+                        new AlwayFail(new DetectTargetBySelf()),
                         new Sequence(
                             new ReceiveCommand(GroupCommand.ATTACK),
                             new Selector(

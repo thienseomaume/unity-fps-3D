@@ -21,7 +21,7 @@ public class DetectTargetBySelf : Node
         Vector3 directionToTarget = target.position - owner.viewPoint.position;
         directionToTarget = new Vector3(directionToTarget.x, 0, directionToTarget.z);
         float cos = Vector3.Dot(owner.viewPoint.up, directionToTarget.normalized);
-        if(cos>0 && cos <= Mathf.Cos(owner.halfOfView))
+        if(directionToTarget.magnitude<=owner.maxDetectRange && cos>0 && cos <= Mathf.Cos(owner.halfOfView))
         {
             float distance = directionToTarget.magnitude;
             if (!Physics.Raycast(owner.viewPoint.position,directionToTarget, distance, owner.obstacleLayer))

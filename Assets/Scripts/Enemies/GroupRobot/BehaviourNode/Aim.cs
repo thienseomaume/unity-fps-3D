@@ -13,7 +13,6 @@ public class Aim : Node
     }
     public override NodeStatus Excute()
     {
-        Debug.Log("aim");
         if (owner.HasGroup())
         {
             if (owner.IsGroupLeader() && owner.group.command != GroupCommand.ATTACK)

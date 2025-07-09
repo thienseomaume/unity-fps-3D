@@ -126,7 +126,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("next to " + nextSceneName);
         EventCenter.Instance().OnSave();
         saveData.levelName = nextSceneName;
-        //saveAction = null;
         saveLoadManager.SaveData(saveData, saveDataPath);
         PlayerInformation.Instance().transform.position = nextPosition;
         PlayerInformation.Instance().gameObject.SetActive(true);

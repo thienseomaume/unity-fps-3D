@@ -17,7 +17,6 @@ public class Move : Node
     }
     public override NodeStatus Excute()
     {
-        Debug.Log("member moving");
         if (group.command == GroupCommand.PATROL && !owner.AnimCurrentIs(AnimationData.HUMANOID_HOLDING))
         {
             owner.AnimInstant(AnimationData.HUMANOID_HOLDING);

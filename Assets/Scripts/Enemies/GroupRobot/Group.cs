@@ -77,8 +77,6 @@ public class Group : MonoBehaviour
     private void LateUpdate()
     {
         detectedTarget = UpdateTargetDetect();
-        Debug.Log(targetDetects.Count);
-        Debug.Log("last position = " + lastTargetPos);
     }
     private void OnDrawGizmos()
     {

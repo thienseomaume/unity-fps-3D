@@ -19,7 +19,6 @@ public class Patrolling : Node
     }
     public override NodeStatus Excute()
     {
-        Debug.Log("patrolling");
         if (owner.HasGroup())
         {
             if (owner.IsGroupLeader() && owner.group.command!=GroupCommand.PATROL)
