@@ -12,7 +12,6 @@ internal class WalkState : IState
     }
     public void EnterState()
     {
-        playerController.limitY = true;
     }
 
     public void ExitState()
@@ -45,6 +44,6 @@ internal class WalkState : IState
     {
         Vector3 velocity = direction.normalized * playerController.speed;
         playerController.velocity = velocity;
-        playerController.playerRigidbody.velocity = new Vector3(velocity.x,playerController.limitY?Mathf.Min( playerController.playerRigidbody.velocity.y,0): playerController.playerRigidbody.velocity.y, velocity.z);
+        playerController.playerRigidbody.velocity = new Vector3(velocity.x,playerController.playerRigidbody.velocity.y, velocity.z);
     }
 }
