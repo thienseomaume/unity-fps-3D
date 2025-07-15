@@ -40,11 +40,11 @@ internal class WalkState : IState
             direction += -playerController.transform.right;
         }
 
-        playerController.directionBeforeJump = direction.normalized;
     }
     public void FixedUpdateState()
     {
         Vector3 velocity = direction.normalized * playerController.speed;
+        playerController.velocity = velocity;
         playerController.playerRigidbody.velocity = new Vector3(velocity.x,playerController.limitY?Mathf.Min( playerController.playerRigidbody.velocity.y,0): playerController.playerRigidbody.velocity.y, velocity.z);
     }
 }

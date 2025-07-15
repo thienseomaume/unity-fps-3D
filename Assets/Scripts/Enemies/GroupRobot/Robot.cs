@@ -143,6 +143,7 @@ public class Robot : Enemy
     }
     public override void DecreaseHealth(int amount)
     {
+        
         curentHealth -= amount;
         if (curentHealth <= 0)
         {

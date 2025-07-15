@@ -30,14 +30,12 @@ public class PlayerController : MonoBehaviour, IHealth
         } }
     public bool isGround;
     [SerializeField]
-    private float gravityAcceleration;
-    [SerializeField]
     public float speed;
     [SerializeField]
     public float addSpeed;
+    [SerializeField] public Vector3 velocity;
     [SerializeField]
     public Vector3 jumpForce;
-    public Vector3 directionBeforeJump;
     [SerializeField]
     private Transform foot;
     [SerializeField]
@@ -91,7 +89,7 @@ public class PlayerController : MonoBehaviour, IHealth
         StateHandle();
         moveStateMachine.UpdateCurrentState();
         armsStateMachine.UpdateCurrentState();
-        if(Cursor.lockState == CursorLockMode.Locked)
+        if (Cursor.lockState == CursorLockMode.Locked)
         {
             ItemInputHandle();
             RotateView();
@@ -113,7 +111,7 @@ public class PlayerController : MonoBehaviour, IHealth
     private void FixedUpdate()
     {
         moveStateMachine.FixedUpdeateCurrentState();
-
+        armsStateMachine.FixedUpdeateCurrentState();
     }
     private void StateHandle()
     {

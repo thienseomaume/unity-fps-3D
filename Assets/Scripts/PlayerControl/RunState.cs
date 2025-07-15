@@ -43,7 +43,6 @@ using UnityEngine;
             {
                 direction += -playerController.transform.right;
             }
-            playerController.directionBeforeJump = direction.normalized;
         }
         public void FixedUpdateState(){
         Vector3 velocity = direction.normalized * (playerController.speed+addSpeed);

@@ -18,7 +18,6 @@ public class OnAirState : IState
 
     public void ExitState()
     {
-        playerController.directionBeforeJump = Vector3.zero;
     }
 
     public void UpdateState()
@@ -40,8 +39,6 @@ public class OnAirState : IState
         {
             direction += -playerController.transform.right;
         }
-
-        playerController.directionBeforeJump = direction.normalized;
     }
     public void FixedUpdateState()
     {
