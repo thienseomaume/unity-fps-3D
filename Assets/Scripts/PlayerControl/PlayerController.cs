@@ -30,10 +30,11 @@ public class PlayerController : MonoBehaviour, IHealth
         } }
     public bool isGround;
     [SerializeField]
-    public float speed;
+    public float force;
     [SerializeField]
-    public float addSpeed;
-    [SerializeField] public Vector3 velocity;
+    public float addForce;
+    [SerializeField] public float groundDrag;
+    [SerializeField] public float downForceOnAir;
     [SerializeField]
     public Vector3 jumpForce;
     [SerializeField]
@@ -54,7 +55,6 @@ public class PlayerController : MonoBehaviour, IHealth
     private GameObject holdGun;
     private float delayTime = 1.0f;
     private float delayTimer;
-    public bool limitY;
     private void Awake()
     {
         
@@ -119,28 +119,29 @@ public class PlayerController : MonoBehaviour, IHealth
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                limitY = false;
-                playerRigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+                playerRigidbody.AddForce(jumpForce, ForceMode.Impulse);
             }
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                    if (Input.GetKey(KeyCode.LeftShift) && delayTimer < 0)
-                    {
-                        moveStateMachine.ChangeState(runState);
-                    }
-                    else
-                    {
-                        moveStateMachine.ChangeState(walkState);
-                    }
-                    
+                if (Input.GetKey(KeyCode.LeftShift) && delayTimer < 0)
+                {
+                    moveStateMachine.ChangeState(runState);
+                }
+                else
+                {
+                    moveStateMachine.ChangeState(walkState);
+                }
+
             }
             else
             {
-                    moveStateMachine.ChangeState(idleState);
+                moveStateMachine.ChangeState(idleState);
             }
+            playerRigidbody.drag = groundDrag;
         }
         else
         {
+            playerRigidbody.drag = 0;
             moveStateMachine.currentState = onAirState;
         }
         if(armsStateMachine.currentState == armStateNone && delayTimer >= 0)

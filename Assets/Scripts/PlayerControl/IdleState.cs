@@ -13,8 +13,6 @@ public class IdleState : IState
     }
     public void EnterState()
     {
-        playerController.playerRigidbody.velocity = new Vector3(0, playerController.limitY ? Mathf.Min(playerController.playerRigidbody.velocity.y, 0) : playerController.playerRigidbody.velocity.y, 0);
-        //playerController.directionBeforeJump = Vector3.zero;
     }
 
     
@@ -26,7 +24,6 @@ public class IdleState : IState
 
     public void UpdateState()
     {
-        playerController.playerRigidbody.velocity = new Vector3(0, playerController.limitY ? Mathf.Min(playerController.playerRigidbody.velocity.y, 0) : playerController.playerRigidbody.velocity.y, 0);
     }
     public void FixedUpdateState()
     {

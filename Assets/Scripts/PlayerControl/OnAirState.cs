@@ -42,7 +42,7 @@ public class OnAirState : IState
     }
     public void FixedUpdateState()
     {
-        Vector3 velocity = direction.normalized * playerController.speed;
-        playerController.playerRigidbody.velocity = new Vector3(velocity.x, playerController.playerRigidbody.velocity.y, velocity.z);
+        Vector3 force = direction.normalized * playerController.force*playerController.downForceOnAir;
+        playerController.playerRigidbody.AddForce(force, ForceMode.Force);
     }
 }

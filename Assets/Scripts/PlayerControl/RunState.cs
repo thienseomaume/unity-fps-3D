@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +12,7 @@ using UnityEngine;
         public RunState(PlayerController playerController)
         {
             this.playerController = playerController;
-            addSpeed = playerController.addSpeed;
+            addSpeed = playerController.addForce;
         }
         public void EnterState()
         {
@@ -45,7 +45,7 @@ using UnityEngine;
             }
         }
         public void FixedUpdateState(){
-        Vector3 velocity = direction.normalized * (playerController.speed+addSpeed);
-        playerController.playerRigidbody.velocity = new Vector3(velocity.x, playerController.limitY ? Mathf.Min(playerController.playerRigidbody.velocity.y, 0) : playerController.playerRigidbody.velocity.y, velocity.z);
+        Vector3 force = direction.normalized * (playerController.force+addSpeed);
+        playerController.playerRigidbody.AddForce(force, ForceMode.Force);
     }
 }
