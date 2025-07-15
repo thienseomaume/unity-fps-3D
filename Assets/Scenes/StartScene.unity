@@ -6056,8 +6056,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: force
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: addForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
       propertyPath: maxHealth
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: footRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: groundDrag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: jumpForce.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004888140194991078, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
+      propertyPath: downForceOnAir
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 9004888140194991079, guid: bc22a3a7eec712b45b5c1a52b3a12efd, type: 3}
       propertyPath: m_Name
@@ -6484,7 +6508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.999977, y: 0}
+  m_AnchoredPosition: {x: 16.99999, y: 0}
   m_SizeDelta: {x: 0, y: 370.69}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &897390949
@@ -11207,7 +11231,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1875658810}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7537613
+  m_Size: 0.75575083
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
