@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmSateReload : IState
+public class ArmSateRPress : IState
 {
     PlayerController playerController;
-    public ArmSateReload(PlayerController playerController)
+    public ArmSateRPress(PlayerController playerController)
     {
         this.playerController = playerController;
     }

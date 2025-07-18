@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmStateFire : IState
+public class ArmStateLeftClick : IState
 {
     PlayerController playerController;
-    public ArmStateFire(PlayerController playerController)
+    public ArmStateLeftClick(PlayerController playerController)
     {
         this.playerController = playerController;
     }

@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmStateNone : IState
+public class ArmStateNoneAction : IState
 {
     private IState currentState;
     private PlayerController playerController;
-    public ArmStateNone(PlayerController playerController)
+    public ArmStateNoneAction(PlayerController playerController)
     {
         this.playerController = playerController;
     }
     public void EnterState()
     {
-        currentState = playerController.moveStateMachine.currentState;
+        currentState = playerController.movingStateMachine.currentState;
         if (currentState.GetType() == typeof(IdleState))
         {
             playerController.ChangeAnimation(AnimationData.IDLE, 0.2f);
@@ -43,9 +43,9 @@ public class ArmStateNone : IState
 
     public void UpdateState()
     {
-        if(currentState != playerController.moveStateMachine.currentState)
+        if(currentState != playerController.movingStateMachine.currentState)
         {
-            currentState = playerController.moveStateMachine.currentState;
+            currentState = playerController.movingStateMachine.currentState;
             if(currentState.GetType() == typeof(IdleState))
             {
                 playerController.ChangeAnimation(AnimationData.IDLE, 0.2f);

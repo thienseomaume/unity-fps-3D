@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.PlayerControl
 {
-    public class PlayerStateMachine
+    public class StateMachine
     {
         public IState currentState { get; set; }
         public void ChangeState(IState state)

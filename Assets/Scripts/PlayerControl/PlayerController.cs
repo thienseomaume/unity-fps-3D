@@ -7,15 +7,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IHealth
 {
     // Start is called before the first frame update
+    
+    public StateMachine movingStateMachine;
     private IdleState idleState;
     private WalkState walkState;
     private RunState runState;
     private OnAirState onAirState;
-    public PlayerStateMachine moveStateMachine;
-    private ArmStateNone armStateNone;
-    private ArmStateFire armStateFire;
-    private ArmSateReload armSateReload;
-    private PlayerStateMachine armsStateMachine;
+
+
+    private StateMachine armsStateMachine;
+    private ArmStateNoneAction armStateNoneAction;
+    private ArmStateLeftClick armStateLeftClick;
+    private ArmSateRPress armSateRPress;
+
+
     public Rigidbody playerRigidbody;
     [SerializeField] private int maxHealth;
     private int _currentHealth;
@@ -35,26 +40,19 @@ public class PlayerController : MonoBehaviour, IHealth
     public float addForce;
     [SerializeField] public float groundDrag;
     [SerializeField] public float downForceOnAir;
-    [SerializeField]
-    public Vector3 jumpForce;
-    [SerializeField]
-    private Transform foot;
-    [SerializeField]
-    private float footRadius;
-    [SerializeField]
-    private LayerMask groundLayer;
+    [SerializeField] public Vector3 jumpForce;
+    [SerializeField] private Transform foot;
+    [SerializeField] private float footRadius;
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] LayerMask itemLayer;
-    [SerializeField]
-    private float sensitivity;
+    [SerializeField] private float sensitivity;
     [SerializeField] private Transform rootTransform;
     [SerializeField] private Transform environmentCamera;
     private float horizontalRotation = 90;
     private float verticalRotation;
     private Animator playerAnimator;
-    [SerializeField]
-    private GameObject holdGun;
-    private float delayTime = 1.0f;
-    private float delayTimer;
+    private float slowdownTime = 1.0f;
+    private float slowdownTimer;
     private void Awake()
     {
         
@@ -65,30 +63,41 @@ public class PlayerController : MonoBehaviour, IHealth
         currentHealth = GameManager.Instance().saveData.currentHealth;
         playerAnimator = GetComponentInChildren<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
-        moveStateMachine = new PlayerStateMachine();
-        armsStateMachine = new PlayerStateMachine();
+        movingStateMachine = new StateMachine();
+        armsStateMachine = new StateMachine();
         idleState = new IdleState(this);
         walkState = new WalkState(this);
         runState = new RunState(this);
         onAirState = new OnAirState(this);
-        armStateNone = new ArmStateNone(this);
-        armStateFire = new ArmStateFire(this);
-        armSateReload = new ArmSateReload(this);
-        moveStateMachine.currentState = idleState;
-        armsStateMachine.currentState = armStateNone;
+        armStateNoneAction = new ArmStateNoneAction(this);
+        armStateLeftClick = new ArmStateLeftClick(this);
+        armSateRPress = new ArmSateRPress(this);
+        movingStateMachine.currentState = idleState;
+        armsStateMachine.currentState = armStateNoneAction;
         Cursor.lockState = CursorLockMode.Locked;
         EventCenter.Instance().saveAction += SavePlayer;
         EventCenter.Instance().onUsingItemLeftClick += ChangeStateToLeftClick;
-        EventCenter.Instance().onUsingItemR += ChangeStateToR;
-        EventCenter.Instance().onUsingNone += ChangeStateToNone;
+        EventCenter.Instance().onUsingItemR += ChangeStateToRPress;
+        EventCenter.Instance().onUsingNone += ChangeStateToNoneAction;
     }
     // Update is called once per frame
     void Update()
     {
         CheckGround();
-        StateHandle();
-        moveStateMachine.UpdateCurrentState();
+        MovingStateHandle();
+        movingStateMachine.UpdateCurrentState();
         armsStateMachine.UpdateCurrentState();
+        LockUnlockCursor();
+        HandleInteract();
+    }
+
+    private void FixedUpdate()
+    {
+        movingStateMachine.FixedUpdeateCurrentState();
+        armsStateMachine.FixedUpdeateCurrentState();
+    }
+    private void LockUnlockCursor()
+    {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             ItemInputHandle();
@@ -105,15 +114,8 @@ public class PlayerController : MonoBehaviour, IHealth
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-        HandleInteract();
     }
-
-    private void FixedUpdate()
-    {
-        moveStateMachine.FixedUpdeateCurrentState();
-        armsStateMachine.FixedUpdeateCurrentState();
-    }
-    private void StateHandle()
+    private void MovingStateHandle()
     {
         if (isGround)
         {
@@ -123,30 +125,29 @@ public class PlayerController : MonoBehaviour, IHealth
             }
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                if (Input.GetKey(KeyCode.LeftShift) && delayTimer < 0)
+                if (Input.GetKey(KeyCode.LeftShift) && slowdownTimer < 0)
                 {
-                    moveStateMachine.ChangeState(runState);
+                    movingStateMachine.ChangeState(runState);
                 }
                 else
                 {
-                    moveStateMachine.ChangeState(walkState);
+                    movingStateMachine.ChangeState(walkState);
                 }
-
             }
             else
             {
-                moveStateMachine.ChangeState(idleState);
+                movingStateMachine.ChangeState(idleState);
             }
             playerRigidbody.drag = groundDrag;
         }
         else
         {
             playerRigidbody.drag = 0;
-            moveStateMachine.currentState = onAirState;
+            movingStateMachine.currentState = onAirState;
         }
-        if(armsStateMachine.currentState == armStateNone && delayTimer >= 0)
+        if (armsStateMachine.currentState == armStateNoneAction && slowdownTimer >= 0)
         {
-            delayTimer -= Time.deltaTime;
+            slowdownTimer -= Time.deltaTime;
         }
     }
    
@@ -213,26 +214,27 @@ public class PlayerController : MonoBehaviour, IHealth
     }
     public void ChangeStateToLeftClick()
     {
-        armsStateMachine.ChangeState(armStateFire);
-        delayTimer = delayTime;
+        armsStateMachine.ChangeState(armStateLeftClick);
+        slowdownTimer = slowdownTime;
     }
-    public void ChangeStateToR()
+    public void ChangeStateToRPress()
     {
-        armsStateMachine.ChangeState(armSateReload);
-        delayTimer = delayTime;
+        armsStateMachine.ChangeState(armSateRPress);
+        slowdownTimer = slowdownTime;
     }
-    public void ChangeStateToNone()
+    public void ChangeStateToNoneAction()
     {
-        armsStateMachine.ChangeState(armStateNone);
+        armsStateMachine.ChangeState(armStateNoneAction);
     }
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(foot.position, footRadius);
     }
 
     public void IncreaseHealth(int amount)
     {
-        
+        currentHealth += amount;
     }
 
     public void DecreaseHealth(int amount)

@@ -7,12 +7,12 @@ using UnityEngine;
     public class RunState : IState
     {
         PlayerController playerController;
-        private float addSpeed;
+        private float addForce;
         private Vector3 direction;
         public RunState(PlayerController playerController)
         {
             this.playerController = playerController;
-            addSpeed = playerController.addForce;
+            addForce = playerController.addForce;
         }
         public void EnterState()
         {
@@ -45,7 +45,7 @@ using UnityEngine;
             }
         }
         public void FixedUpdateState(){
-        Vector3 force = direction.normalized * (playerController.force+addSpeed);
+        Vector3 force = direction.normalized * (playerController.force+addForce);
         playerController.playerRigidbody.AddForce(force, ForceMode.Force);
     }
 }

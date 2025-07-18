@@ -46,7 +46,7 @@ public class PlayerInformation : MonoBehaviour
     {
         if (player != null)
         {
-            player.TakeDamage(-hp);
+            player.GetComponent<IHealth>()?.IncreaseHealth(hp);
         }
     }
     public void OverrideAnimator(AnimatorOverrideController animatorOverride)
